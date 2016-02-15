@@ -14,3 +14,4 @@ struct StudentRecord
 	int midterm;
 	int finalexam;
 };
+

@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include "Header.h"
+#include "Grader.h"
 
 using namespace std;
 bool ReadStudentRecord(StudentRecord* studentRecord, int& numberOfRecord);
@@ -29,38 +30,16 @@ int main()
 ////////////////////////////////////////////////////////////////
 void PrintGrade(StudentRecord* studentRecord, int numberOfRecords)
 {
+	Grade studentgrade;
 	char grade;
 	double average;
 	int index = 0;
 	while (index < numberOfRecords)
 	{
-		average = (((((studentRecord[index].quiz1 + studentRecord[index].quiz2) / 2.0) / 10.0) * 100) * .25)
-			+ (studentRecord[index].midterm * .25)
-			+ (studentRecord[index].finalexam * .5);
-		if (average < 60)
-		{
-			grade = 'F';
-		}
-		else if (average < 70 && average >= 60)
-		{
-			grade = 'D';
-		}
-		else if (average < 80 && average >= 70)
-		{
-			grade = 'C';
-		}
-		else if (average < 90 && average >= 80)
-		{
-			grade = 'B';
-		}
-		else if (average >= 90)
-		{
-			grade = 'A';
-		}
-		else
-		{
-			grade = 'E';
-		}
+		float average = studentgrade.getAvg(studentRecord[index].quiz1, studentRecord[index].quiz2, 
+			studentRecord[index].midterm, studentRecord[index].finalexam);
+		char grade = studentgrade.getGrade(average);
+		
 		cout << "Name: " << studentRecord[index].name << endl;
 		cout << "Quiz 1: " << studentRecord[index].quiz1 << endl;
 		cout << "Quiz 2: " << studentRecord[index].quiz2 << endl;
